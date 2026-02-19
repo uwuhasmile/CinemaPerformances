@@ -1,0 +1,8 @@
+<Solution>
+  <Project Path="CinemaPerformances.Common/CinemaPerformances.Common.csproj" />
+  <Project Path="CinemaPerformances.DBModels/CinemaPerformances.DBModels.csproj" />
+  <Project Path="CinemaPerformances.Services/CinemaPerformances.Services.csproj" />
+  <Project Path="CinemaPerformances.UIModels/CinemaPerformances.UIModels.csproj" />
+  <Project Path="CinemaPerformances/CinemaPerformances.csproj" />
+  <Project Path="CinemaPerformancesConsole/CinemaPerformancesConsole.csproj" />
+</Solution>
