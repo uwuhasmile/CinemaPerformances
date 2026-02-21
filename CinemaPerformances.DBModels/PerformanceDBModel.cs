@@ -11,7 +11,6 @@ public class PerformanceDBModel
     public readonly DateTime ReleaseDate;
     public DateTime Start { get; set; }
     public double Duration { get; set; }
-    public DateTime EndTime => Start.AddMinutes(Duration);
 
     private PerformanceDBModel()
     {
