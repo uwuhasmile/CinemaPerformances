@@ -5,7 +5,7 @@ namespace CinemaPerformances.DBModels;
 public class CinemaHallDBModel
 {
     public readonly Guid Id;
-    public string Name { get; set; }
+    public string? Name { get; set; }
     public int Seats { get; set; }
     public CinemaHallType Type { get; set; }
     
@@ -13,7 +13,7 @@ public class CinemaHallDBModel
     {
     }
 
-    public CinemaHallDBModel(string name, int seats, CinemaHallType type)
+    public CinemaHallDBModel(string? name, int seats, CinemaHallType type)
     {
         Id = Guid.NewGuid();
         Name = name;

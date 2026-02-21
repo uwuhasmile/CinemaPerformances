@@ -6,7 +6,7 @@ public class PerformanceDBModel
 {
     public readonly Guid Id;
     public readonly Guid CinemaHallId;
-    public string Name { get; set; }
+    public string? Name { get; set; }
     public MovieGenre Genre { get; set; }
     public readonly DateTime ReleaseDate;
     public DateTime Start { get; set; }
@@ -16,7 +16,7 @@ public class PerformanceDBModel
     {
     }
 
-    public PerformanceDBModel(Guid cinemaHallId, string name, MovieGenre genre, DateTime releaseDate, DateTime start, double duration)
+    public PerformanceDBModel(Guid cinemaHallId, string? name, MovieGenre genre, DateTime releaseDate, DateTime start, double duration)
     {
         Id = Guid.NewGuid();
         CinemaHallId = cinemaHallId;
