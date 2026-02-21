@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="../CinemaPerformances.DBModels/CinemaPerformances.DBModels.csproj" />
+  </ItemGroup>
+
 </Project>
