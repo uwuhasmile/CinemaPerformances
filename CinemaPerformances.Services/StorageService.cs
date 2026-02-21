@@ -27,6 +27,7 @@ public class StorageService
 
     public IEnumerable<CinemaHallDBModel> GetAllCinemaHalls()
     {
+        LoadData();
         return [.. _cinemaHalls ?? []];
     }
 }
