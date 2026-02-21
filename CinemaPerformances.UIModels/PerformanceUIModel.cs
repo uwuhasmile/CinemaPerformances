@@ -7,7 +7,7 @@ public class PerformanceUIModel
 {
     private PerformanceDBModel? _dbModel;
 
-    public Guid Id => _dbModel?.Id ?? Guid.Empty;
+    public Guid? Id => _dbModel?.Id;
     public readonly Guid CinemaHallId;
     public string? Name { get; set; }
     public MovieGenre Genre { get; set; }
