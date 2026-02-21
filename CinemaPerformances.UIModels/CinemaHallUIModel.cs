@@ -52,4 +52,6 @@ public class CinemaHallUIModel
             TotalDuration += performance.Duration;
         }
     }
+
+    public override string ToString() => $"\"{Name}\": ${Type}, {Seats} seats";
 }

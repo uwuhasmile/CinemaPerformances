@@ -72,4 +72,7 @@ public class PerformanceUIModel
         else
             _dbModel = new(CinemaHallId, Name, Genre, ReleaseDate, Start, Duration);
     }
+
+    public override string ToString() =>
+        $"Performance for \"{Name}\": released on {ReleaseDate}, starts on {Start}, {Duration} minutes";
 }
