@@ -83,7 +83,7 @@ internal class Program
             if (hall.Name?.Equals(cinemaHall, StringComparison.OrdinalIgnoreCase) ?? false)
             {
                 Console.WriteLine($"Performances in the hall {hall.Name}:");
-                hall.LoadPerformances(_storageService);
+                hall.LoadPerformances();
                 foreach (var performance in hall.Performances)
                     Console.WriteLine(performance);
                 Console.WriteLine($"Total duration: {hall.TotalDuration} minutes");
@@ -101,6 +101,6 @@ internal class Program
             return;
         _cinemaHalls = new();
         foreach (var cinemaHall in _storageService.GetAllCinemaHalls())
-            _cinemaHalls.Add(new(cinemaHall));
+            _cinemaHalls.Add(new(_storageService, cinemaHall));
     }
 }

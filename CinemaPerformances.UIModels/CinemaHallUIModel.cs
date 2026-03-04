@@ -6,6 +6,8 @@ namespace CinemaPerformances.UIModels;
 
 public class CinemaHallUIModel
 {
+    private readonly IStorageService _storageService;
+
     private CinemaHallDBModel? _dbModel;
     private readonly List<PerformanceUIModel> _performances;
 
@@ -16,12 +18,13 @@ public class CinemaHallUIModel
     public IReadOnlyList<PerformanceUIModel> Performances => _performances;
     public double TotalDuration { get; private set; }
 
-    public CinemaHallUIModel()
+    public CinemaHallUIModel(IStorageService storageService)
     {
         _performances = new();
+        _storageService = storageService;
     }
 
-    public CinemaHallUIModel(CinemaHallDBModel dbModel) : this()
+    public CinemaHallUIModel(IStorageService storageService, CinemaHallDBModel dbModel) : this(storageService)
     {
         _dbModel = dbModel;
         Name = dbModel.Name;
@@ -41,12 +44,12 @@ public class CinemaHallUIModel
             _dbModel = new(Name, Seats, Type);
     }
 
-    public void LoadPerformances(StorageService storage)
+    public void LoadPerformances()
     {
         if (Id is null || _performances.Count > 0)
             return;
         
-        foreach (var performance in storage.GetPerformances(Id.Value))
+        foreach (var performance in _storageService.GetPerformances(Id.Value))
         {
             _performances.Add(new(performance));
             TotalDuration += performance.Duration;
