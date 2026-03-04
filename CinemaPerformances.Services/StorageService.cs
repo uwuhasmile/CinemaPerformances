@@ -2,7 +2,7 @@ using CinemaPerformances.DBModels;
 
 namespace CinemaPerformances.Services;
 
-public class StorageService
+public class StorageService : IStorageService
 {
     private List<CinemaHallDBModel>? _cinemaHalls;
     private List<PerformanceDBModel>? _performances;
