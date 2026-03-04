@@ -14,11 +14,11 @@ public static class FakeStorage
 
     static FakeStorage()
     {
-        CinemaHallDBModel redHall = new("Red Hall", 64, Common.CinemaHallType.T2D);
-        CinemaHallDBModel greenHall = new("Green Hall", 64, Common.CinemaHallType.T2D);
-        CinemaHallDBModel purpleHall = new("Purple Hall", 64, Common.CinemaHallType.T3D);
-        CinemaHallDBModel orangeHall = new("Orange Hall", 64, Common.CinemaHallType.T3D);
-        CinemaHallDBModel vipHall = new("VIP Hall", 32, Common.CinemaHallType.IMAX);
+        CinemaHallDBModel redHall = new("Red Hall", 64, Common.CinemaHallType.CinemaHallType2D);
+        CinemaHallDBModel greenHall = new("Green Hall", 64, Common.CinemaHallType.CinemaHallType2D);
+        CinemaHallDBModel purpleHall = new("Purple Hall", 64, Common.CinemaHallType.CinemaHallType3D);
+        CinemaHallDBModel orangeHall = new("Orange Hall", 64, Common.CinemaHallType.CinemaHallType3D);
+        CinemaHallDBModel vipHall = new("VIP Hall", 32, Common.CinemaHallType.CinemaHallTypeIMAX);
         s_cinemaHalls = [ redHall, greenHall, purpleHall, orangeHall, vipHall ];
 
         s_performances = [
