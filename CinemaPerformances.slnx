@@ -3,6 +3,8 @@
   <Project Path="CinemaPerformances.DBModels/CinemaPerformances.DBModels.csproj" />
   <Project Path="CinemaPerformances.Services/CinemaPerformances.Services.csproj" />
   <Project Path="CinemaPerformances.UIModels/CinemaPerformances.UIModels.csproj" />
-  <Project Path="CinemaPerformances/CinemaPerformances.csproj" />
+  <Project Path="CinemaPerformances/CinemaPerformances.csproj" Id="ae94543e-c420-4b97-8050-3dbe817e32f9">
+    <Deploy Solution="Debug|*" />
+  </Project>
   <Project Path="CinemaPerformancesConsole/CinemaPerformancesConsole.csproj" />
 </Solution>
