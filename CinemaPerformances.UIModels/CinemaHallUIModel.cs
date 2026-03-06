@@ -9,18 +9,19 @@ public class CinemaHallUIModel
     private readonly IStorageService _storageService;
 
     private CinemaHallDBModel? _dbModel;
-    private readonly List<PerformanceUIModel> _performances;
+    private List<PerformanceUIModel>? _performances;
 
     public Guid? Id => _dbModel?.Id;
     public string? Name { get; set; }
     public int Seats { get; set; }
     public CinemaHallType Type { get; set; }
-    public IReadOnlyList<PerformanceUIModel> Performances => _performances;
+    public IReadOnlyList<PerformanceUIModel> Performances => _performances ?? [];
     public double TotalDuration { get; private set; }
+
+    public string TotalDurationDescription => _performances is null ? "Not loaded" : TotalDuration.ToString();
 
     public CinemaHallUIModel(IStorageService storageService)
     {
-        _performances = new();
         _storageService = storageService;
     }
 
@@ -46,9 +47,10 @@ public class CinemaHallUIModel
 
     public void LoadPerformances()
     {
-        if (Id is null || _performances.Count > 0)
+        if (Id is null || _performances is not null)
             return;
-        
+
+        _performances = new();
         foreach (var performance in _storageService.GetPerformances(Id.Value))
         {
             _performances.Add(new(performance));
