@@ -1,4 +1,4 @@
-﻿using System.ComponentModel;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Reflection;
 
 namespace CinemaPerformances.Common;
@@ -14,8 +14,8 @@ public static class EnumExtensions
             return value.ToString();
 
         var field = type.GetField(name);
-        var display = field?.GetCustomAttribute<DisplayNameAttribute>();
-        return display?.DisplayName ?? name;
+        var display = field?.GetCustomAttribute<DisplayAttribute>();
+        return display?.Name ?? name;
     }
 
     public static EnumWithName<TEnum> GetEnumWithName<TEnum>(this TEnum value) where TEnum : struct, Enum
