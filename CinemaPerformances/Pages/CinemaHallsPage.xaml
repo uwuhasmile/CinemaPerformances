@@ -25,9 +25,10 @@
                             Style="{StaticResource SubHeadline}"
                             HorizontalOptions="Start" />
                         <Label>
-                            <MultiBinding StringFormat="{}{0}, {1} seats">
+                            <MultiBinding StringFormat="{}{0}, {1} seats. Total duration: {2}">
                                 <Binding Path="Type" Converter="{StaticResource EnumToDisplayName}" />
                                 <Binding Path ="Seats" />
+                                <Binding Path ="TotalDurationDescription" />
                             </MultiBinding>
                         </Label>
                     </VerticalStackLayout>
