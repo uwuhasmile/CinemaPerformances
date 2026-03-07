@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:CinemaPerformances.UIModels;assembly=CinemaPerformances.UIModels"
+             x:Class="CinemaPerformances.Pages.CinemaHallDetailsPage"
+             Title="{Binding Name}">
+    <Grid RowDefinitions="Auto, *">
+        <Border
+            Stroke="CornflowerBlue"
+            Padding="10"
+            Margin="0,10">
+            <VerticalStackLayout>
+                <Label>
+                    <MultiBinding StringFormat="{}{0}, {1} seats">
+                        <Binding Path="Type" Converter="{StaticResource EnumToDisplayName}" />
+                        <Binding Path ="Seats" />
+                    </MultiBinding>
+                </Label>
+                <Label>
+                    <MultiBinding StringFormat="Total duration: {0}">
+                        <Binding Path="TotalDurationDescription" />
+                    </MultiBinding>
+                </Label>
+            </VerticalStackLayout>
+        </Border>
+        <CollectionView Grid.Row="1"
+            ItemsSource="{Binding Performances}"
+            Margin="10"
+            SelectionMode="Single"
+            SelectionChanged="PerformanceSelected">
+            <CollectionView.ItemTemplate>
+                <DataTemplate
+                x:DataType="models:PerformanceUIModel">
+                    <Border
+                    Stroke="DarkMagenta"
+                    Padding="10"
+                    Margin="0,10">
+                        <VerticalStackLayout>
+                            <Label
+                                Style="{StaticResource SubHeadline}"
+                                HorizontalOptions="Start">
+                                <MultiBinding StringFormat="{}{0:HH:mm} - {1}">
+                                    <Binding Path="Start" />
+                                    <Binding Path ="Name" />
+                                </MultiBinding>
+                            </Label>
+                            <Label Text="{Binding Genre, Converter={StaticResource EnumToDisplayName}}" />
+                            <Label Text="{Binding Duration, StringFormat='{0} minutes'}" />
+                            <Label Text="{Binding ReleaseDate, StringFormat='{0:yyyy}'}" />
+                        </VerticalStackLayout>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>

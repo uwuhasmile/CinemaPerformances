@@ -18,7 +18,7 @@ public class CinemaHallUIModel
     public IReadOnlyList<PerformanceUIModel> Performances => _performances ?? [];
     public double TotalDuration { get; private set; }
 
-    public string TotalDurationDescription => _performances is null ? "Not loaded" : TotalDuration.ToString();
+    public string TotalDurationDescription => _performances is null ? "Not loaded" : $"{TotalDuration} minutes";
 
     public CinemaHallUIModel(IStorageService storageService)
     {

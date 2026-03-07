@@ -25,5 +25,7 @@ public partial class CinemaHallsPage : ContentPage
     public async void CinemaHallSelected(object sender, SelectionChangedEventArgs e)
     {
         var cinemaHall = (CinemaHallUIModel)e.CurrentSelection[0];
+        await Shell.Current.GoToAsync($"{nameof(CinemaHallDetailsPage)}",
+                new Dictionary<string, object> { { nameof(CinemaHallDetailsPage.CurrentCinemaHall), cinemaHall } });
     }
 }

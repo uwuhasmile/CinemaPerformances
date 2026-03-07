@@ -1,4 +1,5 @@
-﻿using CinemaPerformances.Services;
+﻿using CinemaPerformances.Pages;
+using CinemaPerformances.Services;
 
 using Microsoft.Extensions.Logging;
 
@@ -21,6 +22,8 @@ public static class MauiProgram
 		builder.Logging.AddDebug();
 #endif
         builder.Services.AddSingleton<IStorageService, StorageService>();
+        builder.Services.AddTransient<CinemaHallDetailsPage>();
+        builder.Services.AddTransient<PerformanceDetailsPage>();
 
         return builder.Build();
     }

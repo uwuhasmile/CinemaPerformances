@@ -46,11 +46,11 @@ public class PerformanceUIModel
 
     public PerformanceUIModel(PerformanceDBModel dbModel)
     {
+        ReleaseDate = dbModel.ReleaseDate;
         _dbModel = dbModel;
         CinemaHallId = _dbModel.CinemaHallId;
         Name = dbModel.Name;
         Genre = dbModel.Genre;
-        ReleaseDate = dbModel.ReleaseDate;
         Start = dbModel.Start;
         Duration = dbModel.Duration;
     }
