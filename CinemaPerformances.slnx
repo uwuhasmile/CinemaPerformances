@@ -1,6 +1,7 @@
 <Solution>
   <Project Path="CinemaPerformances.Common/CinemaPerformances.Common.csproj" />
   <Project Path="CinemaPerformances.DBModels/CinemaPerformances.DBModels.csproj" />
+  <Project Path="CinemaPerformances.DTOModels/CinemaPerformances.DTOModels.csproj" Id="33a90dad-66f5-4c83-a3c7-3f34bd958536" />
   <Project Path="CinemaPerformances.Services/CinemaPerformances.Services.csproj" />
   <Project Path="CinemaPerformances.UIModels/CinemaPerformances.UIModels.csproj" />
   <Project Path="CinemaPerformances/CinemaPerformances.csproj" Id="ae94543e-c420-4b97-8050-3dbe817e32f9">
