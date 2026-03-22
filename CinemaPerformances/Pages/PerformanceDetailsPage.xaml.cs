@@ -1,22 +1,12 @@
-using CinemaPerformances.UIModels;
+using CinemaPerformances.ViewModels;
 
 namespace CinemaPerformances.Pages;
 
-[QueryProperty(nameof(CurrentPerformance), nameof(CurrentPerformance))]
 public partial class PerformanceDetailsPage : ContentPage
 {
-    public PerformanceUIModel CurrentPerformance
-    {
-        get;
-        set
-        {
-            field = value;
-            BindingContext = field;
-        }
-    }
-
-	public PerformanceDetailsPage()
+	public PerformanceDetailsPage(PerformanceDetailsViewModel viewModel)
 	{
 		InitializeComponent();
+        BindingContext = viewModel;
 	}
 }

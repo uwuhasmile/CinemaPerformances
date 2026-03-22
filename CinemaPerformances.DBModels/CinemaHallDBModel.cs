@@ -13,9 +13,13 @@ public class CinemaHallDBModel
     {
     }
 
-    public CinemaHallDBModel(string? name, int seats, CinemaHallType type)
+    public CinemaHallDBModel(string? name, int seats, CinemaHallType type) : this(Guid.NewGuid(), name, seats, type)
     {
-        Id = Guid.NewGuid();
+    }
+
+    public CinemaHallDBModel(Guid id, string? name, int seats, CinemaHallType type)
+    {
+        Id = id;
         Name = name;
         Seats = seats;
         Type = type;

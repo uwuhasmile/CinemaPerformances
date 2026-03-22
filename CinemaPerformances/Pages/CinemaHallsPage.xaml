@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:pages="clr-namespace:CinemaPerformances.Pages"
-             xmlns:models="clr-namespace:CinemaPerformances.UIModels;assembly=CinemaPerformances.UIModels"
+             xmlns:models="clr-namespace:CinemaPerformances.DTOModels;assembly=CinemaPerformances.DTOModels"
+             xmlns:vm="clr-namespace:CinemaPerformances.ViewModels"
              xmlns:tools="clr-namespaces:CinemaPerformances.Tools"
              x:Class="CinemaPerformances.Pages.CinemaHallsPage"
              x:DataType="pages:CinemaHallsPage"
@@ -11,10 +12,11 @@
         ItemsSource="{Binding CinemaHalls}"
         Margin="10"
         SelectionMode="Single"
-        SelectionChanged="CinemaHallSelected">
+        SelectedItem="{Binding SelectedCinemaHall}"
+        SelectionChangedCommand="{Binding CinemaHallSelectedCommand}">
         <CollectionView.ItemTemplate>
             <DataTemplate
-                x:DataType="models:CinemaHallUIModel">
+                x:DataType="models:CinemaHallListDTO">
                 <Border
                     Stroke="CornflowerBlue"
                     Padding="10"
@@ -31,8 +33,8 @@
                             </MultiBinding>
                         </Label>
                         <Label>
-                            <MultiBinding StringFormat="Total duration: {0}">
-                                <Binding Path="TotalDurationDescription" />
+                            <MultiBinding StringFormat="Total duration: {0} minutes">
+                                <Binding Path="TotalDuration" />
                             </MultiBinding>
                         </Label>
                     </VerticalStackLayout>

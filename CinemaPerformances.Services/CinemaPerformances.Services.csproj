@@ -8,6 +8,9 @@
 
   <ItemGroup>
     <ProjectReference Include="../CinemaPerformances.DBModels/CinemaPerformances.DBModels.csproj" />
+    <ProjectReference Include="..\CinemaPerformances.DTOModels\CinemaPerformances.DTOModels.csproj" />
+    <ProjectReference Include="..\CinemaPerformances.Repositories\CinemaPerformances.Repositories.csproj" />
+    <ProjectReference Include="..\CinemaPerformances.Storage\CinemaPerformances.Storage.csproj" />
   </ItemGroup>
 
 </Project>

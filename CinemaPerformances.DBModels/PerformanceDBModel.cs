@@ -12,13 +12,14 @@ public class PerformanceDBModel
     public DateTime Start { get; set; }
     public double Duration { get; set; }
 
-    private PerformanceDBModel()
+    public PerformanceDBModel(Guid cinemaHallId, string? name, MovieGenre genre, DateTime releaseDate, DateTime start, double duration)
+        : this(Guid.NewGuid(), cinemaHallId, name, genre, releaseDate, start, duration)
     {
     }
 
-    public PerformanceDBModel(Guid cinemaHallId, string? name, MovieGenre genre, DateTime releaseDate, DateTime start, double duration)
+    public PerformanceDBModel(Guid id, Guid cinemaHallId, string? name, MovieGenre genre, DateTime releaseDate, DateTime start, double duration)
     {
-        Id = Guid.NewGuid();
+        Id = id;
         CinemaHallId = cinemaHallId;
         Name = name;
         Genre = genre;

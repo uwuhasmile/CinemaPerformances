@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:models="clr-namespace:CinemaPerformances.UIModels;assembly=CinemaPerformances.UIModels"
+             xmlns:models="clr-namespace:CinemaPerformances.DTOModels;assembly=CinemaPerformances.DTOModels"
+             xmlns:vm="clr-namespace:CinemaPerformances.ViewModels"
              xmlns:tools="clr-namespaces:CinemaPerformances.Tools"
              x:Class="CinemaPerformances.Pages.PerformanceDetailsPage"
              Title="Performance Details">

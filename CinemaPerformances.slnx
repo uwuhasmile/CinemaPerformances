@@ -2,7 +2,9 @@
   <Project Path="CinemaPerformances.Common/CinemaPerformances.Common.csproj" />
   <Project Path="CinemaPerformances.DBModels/CinemaPerformances.DBModels.csproj" />
   <Project Path="CinemaPerformances.DTOModels/CinemaPerformances.DTOModels.csproj" Id="33a90dad-66f5-4c83-a3c7-3f34bd958536" />
+  <Project Path="CinemaPerformances.Repositories/CinemaPerformances.Repositories.csproj" Id="a779387a-cd2a-4674-9bd6-e7e6cc584dba" />
   <Project Path="CinemaPerformances.Services/CinemaPerformances.Services.csproj" />
+  <Project Path="CinemaPerformances.Storage/CinemaPerformances.Storage.csproj" Id="d832ac72-b073-4411-944b-4a11625d4a27" />
   <Project Path="CinemaPerformances.UIModels/CinemaPerformances.UIModels.csproj" />
   <Project Path="CinemaPerformances/CinemaPerformances.csproj" Id="ae94543e-c420-4b97-8050-3dbe817e32f9">
     <Deploy Solution="Debug|*" />

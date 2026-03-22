@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CinemaPerformances.Common\CinemaPerformances.Common.csproj" />
+    <ProjectReference Include="..\CinemaPerformances.Storage\CinemaPerformances.Storage.csproj" />
   </ItemGroup>
 
 </Project>
