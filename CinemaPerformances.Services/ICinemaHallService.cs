@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-using CinemaPerformances.DTOModels;
+﻿using CinemaPerformances.DTOModels;
 
 namespace CinemaPerformances.Services;
 
