@@ -6,28 +6,41 @@
              xmlns:tools="clr-namespaces:CinemaPerformances.Tools"
              x:Class="CinemaPerformances.Pages.PerformanceDetailsPage"
              Title="Performance Details">
-    <ScrollView>
-        <VerticalStackLayout
-            Padding="10,20"
-            Spacing="10">
-            <Label
-                Style="{StaticResource SubHeadline}"
-                HorizontalOptions="Start"
-                Text="{Binding Name}" />
-            <Label Text="Duration" />
-            <Label Margin="10,0" Text="{Binding Duration, StringFormat='{0} minutes'}"/>
-            <Label
-                Text="Span" />
-            <Label Margin="10,0">
-                <MultiBinding StringFormat="{}{0:HH:mm} - {1:HH:mm}">
-                    <Binding Path="Start" />
-                    <Binding Path="End" />
-                </MultiBinding>
-            </Label>
-            <Label Text="Genre" />
-            <Label Margin="10,0" Text="{Binding Genre, Converter={StaticResource EnumToDisplayName}}"/>
-            <Label Text="Release date" />
-            <Label Margin="10,0" Text="{Binding ReleaseDate, StringFormat='{0:d MMMM, yyyy}'}"/>
-        </VerticalStackLayout>
-    </ScrollView>
+    <Grid RowDefinitions="*,Auto">
+        <ScrollView>
+            <VerticalStackLayout
+                Padding="10,20"
+                Spacing="10">
+                <Label
+                    Style="{StaticResource SubHeadline}"
+                    HorizontalOptions="Start"
+                    Text="{Binding Name}" />
+                <Label Text="Duration" />
+                <Label Margin="10,0" Text="{Binding Duration, StringFormat='{0} minutes'}"/>
+                <Label
+                    Text="Span" />
+                <Label Margin="10,0">
+                    <MultiBinding StringFormat="{}{0:HH:mm} - {1:HH:mm}">
+                        <Binding Path="Start" />
+                        <Binding Path="End" />
+                    </MultiBinding>
+                </Label>
+                <Label Text="Genre" />
+                <Label Margin="10,0" Text="{Binding Genre, Converter={StaticResource EnumToDisplayName}}"/>
+                <Label Text="Release date" />
+                <Label Margin="10,0" Text="{Binding ReleaseDate, StringFormat='{0:d MMMM, yyyy}'}"/>
+            </VerticalStackLayout>
+        </ScrollView>
+        <BoxView
+            IsVisible="{Binding IsBusy}"
+            BackgroundColor="Gray"
+            Opacity="0.2"
+            InputTransparent="False"/>
+        <ActivityIndicator
+            Color="CornflowerBlue"
+            IsRunning="{Binding IsBusy}"
+            IsVisible="{Binding IsBusy}"
+            VerticalOptions="Center"
+            HorizontalOptions="Center"/>
+    </Grid>
 </ContentPage>

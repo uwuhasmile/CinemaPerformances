@@ -3,43 +3,94 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:pages="clr-namespace:CinemaPerformances.Pages"
              xmlns:models="clr-namespace:CinemaPerformances.DTOModels;assembly=CinemaPerformances.DTOModels"
-             xmlns:vm="clr-namespace:CinemaPerformances.ViewModels"
+             xmlns:vms="clr-namespace:CinemaPerformances.ViewModels"
              xmlns:tools="clr-namespaces:CinemaPerformances.Tools"
              x:Class="CinemaPerformances.Pages.CinemaHallsPage"
-             x:DataType="pages:CinemaHallsPage"
-             Title="Cinema Halls">
-    <CollectionView
-        ItemsSource="{Binding CinemaHalls}"
-        Margin="10"
-        SelectionMode="Single"
-        SelectedItem="{Binding SelectedCinemaHall}"
-        SelectionChangedCommand="{Binding CinemaHallSelectedCommand}">
-        <CollectionView.ItemTemplate>
-            <DataTemplate
-                x:DataType="models:CinemaHallListDTO">
-                <Border
-                    Stroke="CornflowerBlue"
-                    Padding="10"
-                    Margin="0,10">
-                    <VerticalStackLayout>
-                        <Label
-                            Text="{Binding Name}"
-                            Style="{StaticResource SubHeadline}"
-                            HorizontalOptions="Start" />
-                        <Label>
-                            <MultiBinding StringFormat="{}{0}, {1} seats">
-                                <Binding Path="Type" Converter="{StaticResource EnumToDisplayName}" />
-                                <Binding Path ="Seats" />
-                            </MultiBinding>
-                        </Label>
-                        <Label>
-                            <MultiBinding StringFormat="Total duration: {0} minutes">
-                                <Binding Path="TotalDuration" />
-                            </MultiBinding>
-                        </Label>
-                    </VerticalStackLayout>
-                </Border>
-            </DataTemplate>
-        </CollectionView.ItemTemplate>
-    </CollectionView>
+             x:DataType="vms:CinemaHallsViewModel"
+             Title="Cinema Halls" IsEnabled="{Binding IsNotBusy}">
+    <Grid RowDefinitions="Auto,*,Auto">
+        <VerticalStackLayout>
+            <SearchBar
+                Placeholder="Search cinema halls..."
+                Text="{Binding SearchQuery}"
+                SearchCommand="{Binding RefreshDataCommand}" />
+            <Grid ColumnDefinitions="*,*">
+                <Picker
+                    Title="Filter"
+                    ItemDisplayBinding="{Binding DisplayName}"
+                    ItemsSource="{Binding Filters}"
+                    SelectedItem="{Binding Filter}" />
+                <Picker
+                    Grid.Column="1"
+                    Title="Sort"
+                    ItemDisplayBinding="{Binding DisplayName}"
+                    ItemsSource="{Binding Sortings}"
+                    SelectedItem="{Binding Sorting}" />
+            </Grid>
+        </VerticalStackLayout>
+        <CollectionView
+                Grid.Row="1"
+                ItemsSource="{Binding CinemaHalls}"
+                Margin="10"
+                SelectionMode="Single"
+                SelectedItem="{Binding SelectedCinemaHall}"
+                SelectionChangedCommand="{Binding LoadCinemaHallCommand}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate
+                        x:DataType="models:CinemaHallListDTO">
+                    <Border
+                            Stroke="CornflowerBlue"
+                            Padding="10"
+                            Margin="0,10">
+                        <Grid>
+                            <VerticalStackLayout>
+                                <Label
+                                        Text="{Binding Name}"
+                                        Style="{StaticResource SubHeadline}"
+                                        HorizontalOptions="Start" />
+                                <Label>
+                                    <MultiBinding StringFormat="{}{0}, {1} seats">
+                                        <Binding Path="Type" Converter="{StaticResource EnumToDisplayName}" />
+                                        <Binding Path ="Seats" />
+                                    </MultiBinding>
+                                </Label>
+                                <Label>
+                                    <MultiBinding StringFormat="Total duration: {0} minutes">
+                                        <Binding Path="TotalDuration" />
+                                    </MultiBinding>
+                                </Label>
+                            </VerticalStackLayout>
+                            <VerticalStackLayout HorizontalOptions="End">
+                                <Button
+                                        Text="Edit"
+                                        BackgroundColor="CornflowerBlue"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type vms:CinemaHallsViewModel}}, Path=EditCinemaHallCommand}"
+                                        CommandParameter="{Binding .}" />
+                                <Button Text="Delete"
+                                            BackgroundColor="CornflowerBlue"
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type vms:CinemaHallsViewModel}},Path=DeleteCinemaHallCommand}"
+                                            CommandParameter="{Binding .}" />
+                            </VerticalStackLayout>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <Button Grid.Row="2"
+                Text="Add a Cinema Hall"
+                Margin="0,10,0,0"
+                BackgroundColor="CornflowerBlue"
+                Command="{Binding AddCinemaHallCommand}" />
+        <BoxView
+                IsVisible="{Binding IsBusy}"
+                BackgroundColor="Gray"
+                Opacity="0.2"
+                InputTransparent="False" />
+        <ActivityIndicator
+                Color="CornflowerBlue"
+                IsRunning="{Binding IsBusy}"
+                IsVisible="{Binding IsBusy}"
+                VerticalOptions="Center"
+                HorizontalOptions="Center" />
+    </Grid>
 </ContentPage>

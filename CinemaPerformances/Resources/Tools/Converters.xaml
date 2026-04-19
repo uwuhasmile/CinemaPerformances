@@ -4,4 +4,5 @@
              xmlns:tools="clr-namespace:CinemaPerformances.Tools"
              x:Class="CinemaPerformances.Resources.Tools.Converters">
     <tools:EnumToDisplayNameConverter x:Key="EnumToDisplayName" />
+    <tools:StringToBoolConverter x:Key="StringToBool" />
 </ResourceDictionary>

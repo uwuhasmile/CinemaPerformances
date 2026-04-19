@@ -1,11 +1,15 @@
-﻿using CinemaPerformances.DBModels;
+﻿using CinemaPerformances.Common.Enums;
+using CinemaPerformances.DBModels;
 
 namespace CinemaPerformances.Repositories;
 
 public interface IPerformanceRepository
 {
-    IEnumerable<PerformanceDBModel> GetPerformancesByCinemaHall(Guid cinemaHallId);
+    Task<IEnumerable<PerformanceDBModel>> GetPerformancesByCinemaHall(Guid cinemaHallId, string? query = null, PerformanceFilter filter = PerformanceFilter.None, PerformanceSorting sorting = PerformanceSorting.None);
 
-    PerformanceDBModel? GetPerformance(Guid id);
-    IEnumerable<PerformanceDBModel> GetPerformances();
+    Task<PerformanceDBModel?> GetPerformance(Guid id);
+    IAsyncEnumerable<PerformanceDBModel> GetPerformances();
+
+    Task SavePerformance(PerformanceDBModel performance);
+    Task DeletePerformance(Guid id);
 }

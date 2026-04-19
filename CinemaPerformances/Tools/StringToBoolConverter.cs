@@ -4,17 +4,11 @@ using CinemaPerformances.Common;
 
 namespace CinemaPerformances.Tools;
 
-public class EnumToDisplayNameConverter : IValueConverter
+public class StringToBoolConverter : IValueConverter
 {
     public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
-        if (value is null)
-            return string.Empty;
-
-        if (value is not Enum enumeration)
-            return value.ToString() ?? string.Empty;
-
-        return enumeration.GetDisplayName();
+        return !string.IsNullOrWhiteSpace(value as string);
     }
 
     public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)

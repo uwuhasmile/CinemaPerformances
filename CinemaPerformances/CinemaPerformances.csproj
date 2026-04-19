@@ -76,10 +76,37 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Pages\PerformanceEditPage.xaml.cs">
+	    <DependentUpon>PerformanceEditPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\PerformanceCreatePage.xaml.cs">
+	    <DependentUpon>PerformanceCreatePage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\CinemaHallEditPage.xaml.cs">
+	    <DependentUpon>CinemaHallEditPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\CinemaHallCreatePage.xaml.cs">
+	    <DependentUpon>CinemaHallCreatePage.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="Pages\PerformanceEditPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\PerformanceCreatePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\CinemaHallEditPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\CinemaHallDetailsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\CinemaHallsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\CinemaHallCreatePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\PerformanceDetailsPage.xaml">

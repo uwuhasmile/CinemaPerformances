@@ -4,12 +4,12 @@ namespace CinemaPerformances.DBModels;
 
 public class CinemaHallDBModel
 {
-    public readonly Guid Id;
+    public Guid Id { get; set; }
     public string? Name { get; set; }
     public int Seats { get; set; }
     public CinemaHallType Type { get; set; }
-    
-    private CinemaHallDBModel()
+
+    public CinemaHallDBModel()
     {
     }
 

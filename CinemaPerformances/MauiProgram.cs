@@ -24,7 +24,7 @@ public static class MauiProgram
 #if DEBUG
 		builder.Logging.AddDebug();
 #endif
-        builder.Services.AddSingleton<IStorageContext, InMemoryStorageContext>();
+        builder.Services.AddSingleton<IStorageContext, FileStorageContext>();
         builder.Services.AddSingleton<ICinemaHallRepository, CinemaHallRepository>();
         builder.Services.AddSingleton<IPerformanceRepository, PerformanceRepository>();
 
@@ -32,11 +32,19 @@ public static class MauiProgram
         builder.Services.AddSingleton<IPerformanceService, PerformanceService>();
 
         builder.Services.AddSingleton<CinemaHallsPage>();
+        builder.Services.AddSingleton<CinemaHallCreatePage>();
+        builder.Services.AddSingleton<CinemaHallEditPage>();
         builder.Services.AddTransient<CinemaHallDetailsPage>();
+        builder.Services.AddTransient<PerformanceCreatePage>();
+        builder.Services.AddTransient<PerformanceEditPage>();
         builder.Services.AddTransient<PerformanceDetailsPage>();
 
         builder.Services.AddSingleton<CinemaHallsViewModel>();
+        builder.Services.AddSingleton<CinemaHallCreateViewModel>();
+        builder.Services.AddSingleton<CinemaHallEditViewModel>();
         builder.Services.AddTransient<CinemaHallDetailsViewModel>();
+        builder.Services.AddTransient<PerformanceCreateViewModel>();
+        builder.Services.AddTransient<PerformanceEditViewModel>();
         builder.Services.AddTransient<PerformanceDetailsViewModel>();
 
         return builder.Build();

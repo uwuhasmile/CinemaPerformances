@@ -4,20 +4,24 @@ namespace CinemaPerformances.DBModels;
 
 public class PerformanceDBModel
 {
-    public readonly Guid Id;
-    public readonly Guid CinemaHallId;
+    public Guid Id { get; set; }
+    public Guid CinemaHallId { get; set; }
     public string? Name { get; set; }
     public MovieGenre Genre { get; set; }
-    public readonly DateTime ReleaseDate;
-    public DateTime Start { get; set; }
+    public DateTime ReleaseDate { get; set; }
+    public TimeSpan Start { get; set; }
     public double Duration { get; set; }
 
-    public PerformanceDBModel(Guid cinemaHallId, string? name, MovieGenre genre, DateTime releaseDate, DateTime start, double duration)
+    public PerformanceDBModel()
+    {
+    }
+
+    public PerformanceDBModel(Guid cinemaHallId, string? name, MovieGenre genre, DateTime releaseDate, TimeSpan start, double duration)
         : this(Guid.NewGuid(), cinemaHallId, name, genre, releaseDate, start, duration)
     {
     }
 
-    public PerformanceDBModel(Guid id, Guid cinemaHallId, string? name, MovieGenre genre, DateTime releaseDate, DateTime start, double duration)
+    public PerformanceDBModel(Guid id, Guid cinemaHallId, string? name, MovieGenre genre, DateTime releaseDate, TimeSpan start, double duration)
     {
         Id = id;
         CinemaHallId = cinemaHallId;

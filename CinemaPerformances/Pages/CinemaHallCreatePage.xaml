@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:pages="clr-namespace:CinemaPerformances.Pages"
+             xmlns:vms="clr-namespace:CinemaPerformances.ViewModels"
+             x:Class="CinemaPerformances.Pages.CinemaHallCreatePage"
+             x:DataType="vms:CinemaHallCreateViewModel"
+             Title="Create a Cinema Hall" IsEnabled="{Binding IsNotBusy}">
+    <Grid>
+        <ScrollView>
+            <VerticalStackLayout
+                Padding="10,20"
+                Spacing="10">
+                <Label Text="Name" />
+                <Entry Placeholder="Name" Text="{Binding Name}" />
+                <Label Text="{Binding Errors[Name]}" TextColor="Red" IsVisible="{Binding Errors[Name], Converter={StaticResource StringToBool}}" />
+                <Label Text="Seats" />
+                <Entry Placeholder="1" Text="{Binding Seats}" />
+                <Label Text="{Binding Errors[Seats]}" TextColor="Red" IsVisible="{Binding Errors[Seats], Converter={StaticResource StringToBool}}" />
+                <Label Text="Postion" />
+                <Picker
+                    Title="Select Cinema Hall type"
+                    ItemDisplayBinding="{Binding DisplayName}"
+                    ItemsSource="{Binding Types}"
+                    SelectedItem="{Binding Type}" />
+                <Label Text="{Binding Errors[Type]}" TextColor="Red" IsVisible="{Binding Errors[Type], Converter={StaticResource StringToBool}}" />
+                <Grid
+                    ColumnDefinitions="*,*"
+                    ColumnSpacing="10"
+                    Padding="10">
+                    <Button
+                        Grid.Column="0"
+                        Text="Create"
+                        BackgroundColor="CornflowerBlue"
+                        Command="{Binding CreateCinemaHallCommand}"></Button>
+                    <Button
+                        Grid.Column="1"
+                        Text="Back"
+                        BackgroundColor="CornflowerBlue"
+                        Command="{Binding BackCommand}"></Button>
+                </Grid>
+            </VerticalStackLayout>
+        </ScrollView>
+        <BoxView
+            IsVisible="{Binding IsBusy}"
+            BackgroundColor="Gray"
+            Opacity="0.2"
+            InputTransparent="False"/>
+        <ActivityIndicator
+            Color="CornflowerBlue"
+            IsRunning="{Binding IsBusy}"
+            IsVisible="{Binding IsBusy}"
+            VerticalOptions="Center"
+            HorizontalOptions="Center"/>
+    </Grid>
+</ContentPage>

@@ -1,4 +1,8 @@
-﻿using CinemaPerformances.DTOModels;
+﻿using System.ComponentModel.DataAnnotations;
+
+using CinemaPerformances.Common.Enums;
+using CinemaPerformances.DBModels;
+using CinemaPerformances.DTOModels;
 using CinemaPerformances.Repositories;
 
 namespace CinemaPerformances.Services;
@@ -12,15 +16,36 @@ public class PerformanceService : IPerformanceService
         _performanceRepository = performanceRepository;
     }
 
-    public PerformanceDetailsDTO? GetPerformance(Guid id)
+    public async Task<PerformanceDetailsDTO?> GetPerformance(Guid id)
     {
-        var performance = _performanceRepository.GetPerformance(id);
-        return performance is null ? null : new(id, performance.Name!, performance.Genre, performance.ReleaseDate, performance.Start, performance.Duration, performance.Start.AddMinutes(performance.Duration));
+        var performance = await _performanceRepository.GetPerformance(id);
+        return performance is null ? null : new(id, performance.Name!, performance.Genre, performance.ReleaseDate, new DateTime().Add(performance.Start), performance.Duration);
     }
 
-    public IEnumerable<PerformanceListDTO> GetPerformancesByCinemaHall(Guid cinemaHallId)
+    public async Task<IEnumerable<PerformanceListDTO>> GetPerformancesByCinemaHall(Guid cinemaHallId, string? query, PerformanceFilter filter, PerformanceSorting sorting)
     {
-        foreach (var department in _performanceRepository.GetPerformancesByCinemaHall(cinemaHallId))
-            yield return new(department.Id, department.Name!, department.Genre, department.ReleaseDate, department.Start, department.Duration);
+        return (await _performanceRepository.GetPerformancesByCinemaHall(cinemaHallId, query, filter, sorting))
+            .Select(x => new PerformanceListDTO(x.Id, x.Name!, x.Genre, x.ReleaseDate, new DateTime().Add(x.Start), x.Duration));
+    }
+
+    public async Task CreatePerformance(PerformanceCreateDTO performance)
+    {
+        var errors = performance.Validate();
+        if (errors.Count > 0) throw new ValidationException(string.Join(Environment.NewLine, errors.Select(x => x.Message)));
+        PerformanceDBModel newPerformance = new(performance.CinemaHallId, performance.Name, performance.Genre, performance.ReleaseDate, performance.Start, performance.Duration);
+        await _performanceRepository.SavePerformance(newPerformance);
+    }
+
+    public async Task EditPerformance(PerformanceEditDTO performance)
+    {
+        var errors = performance.Validate();
+        if (errors.Count > 0) throw new ValidationException(string.Join(Environment.NewLine, errors.Select(x => x.Message)));
+        PerformanceDBModel updatedPerformance = new(performance.Id, performance.CinemaHallId, performance.Name, performance.Genre, performance.ReleaseDate, performance.Start, performance.Duration);
+        await _performanceRepository.SavePerformance(updatedPerformance);
+    }
+
+    public async Task DeletePerformance(Guid id)
+    {
+        await _performanceRepository.DeletePerformance(id);
     }
 }

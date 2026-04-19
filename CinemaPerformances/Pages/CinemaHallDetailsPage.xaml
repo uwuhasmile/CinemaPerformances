@@ -2,10 +2,11 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:models="clr-namespace:CinemaPerformances.DTOModels;assembly=CinemaPerformances.DTOModels"
-             xmlns:vm="clr-namespace:CinemaPerformances.ViewModels"
+             xmlns:vms="clr-namespace:CinemaPerformances.ViewModels"
              x:Class="CinemaPerformances.Pages.CinemaHallDetailsPage"
+             x:DataType="vms:CinemaHallDetailsViewModel"
              Title="{Binding CurrentCinemaHall.Name}">
-    <Grid RowDefinitions="Auto, *">
+    <Grid RowDefinitions="Auto,Auto,*,Auto">
         <Border
             Stroke="CornflowerBlue"
             Padding="10"
@@ -24,38 +25,95 @@
                 </Label>
             </VerticalStackLayout>
         </Border>
-        <CollectionView Grid.Row="1"
-            ItemsSource="{Binding Performances}"
-            Margin="10"
-            SelectionMode="None">
-            <CollectionView.ItemTemplate>
-                <DataTemplate
-                x:DataType="models:PerformanceListDTO">
-                    <Border
-                    Stroke="DarkMagenta"
-                    Padding="10"
-                    Margin="0,10">
-                        <Border.GestureRecognizers>
-                            <TapGestureRecognizer
-                                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CinemaHallDetailsViewModel}}, Path=LoadPerformanceCommand}"
-                                CommandParameter="{Binding Id}" />
-                        </Border.GestureRecognizers>
-                        <VerticalStackLayout>
-                            <Label
-                                Style="{StaticResource SubHeadline}"
-                                HorizontalOptions="Start">
-                                <MultiBinding StringFormat="{}{0:HH:mm} - {1}">
-                                    <Binding Path="Start" />
-                                    <Binding Path ="Name" />
-                                </MultiBinding>
-                            </Label>
-                            <Label Text="{Binding Genre, Converter={StaticResource EnumToDisplayName}}" />
-                            <Label Text="{Binding Duration, StringFormat='{0} minutes'}" />
-                            <Label Text="{Binding ReleaseDate, StringFormat='{0:yyyy}'}" />
-                        </VerticalStackLayout>
-                    </Border>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
+        <VerticalStackLayout Grid.Row="1">
+            <SearchBar
+                Placeholder="Search cinema halls..."
+                Text="{Binding SearchQuery}"
+                SearchCommand="{Binding RefreshDataCommand}" />
+            <Grid ColumnDefinitions="*,*">
+            <Picker
+                Title="Filter"
+                ItemDisplayBinding="{Binding DisplayName}"
+                ItemsSource="{Binding Filters}"
+                SelectedItem="{Binding Filter}" />
+            <Picker
+                Grid.Column="1"
+                Title="Sort"
+                ItemDisplayBinding="{Binding DisplayName}"
+                ItemsSource="{Binding Sortings}"
+                SelectedItem="{Binding Sorting}" />
+            </Grid>
+        </VerticalStackLayout>
+        <Border
+            Grid.Row="2"
+            VerticalOptions="Fill" 
+            Stroke="CornflowerBlue" 
+            Padding="10" 
+            Margin="0,10">
+            <RefreshView Command="{Binding RefreshDataCommand}">
+                <CollectionView Grid.Row="1"
+                ItemsSource="{Binding Performances}"
+                Margin="10"
+                SelectionMode="None">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate
+                            x:DataType="models:PerformanceListDTO">
+                            <Border
+                                Stroke="DarkMagenta"
+                                Padding="10"
+                                Margin="0,10">
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vms:CinemaHallDetailsViewModel}}, Path=LoadPerformanceCommand}"
+                                    CommandParameter="{Binding Id}" />
+                                </Border.GestureRecognizers>
+                                <Grid>
+                                    <VerticalStackLayout>
+                                        <Label
+                                            Style="{StaticResource SubHeadline}"
+                                            HorizontalOptions="Start">
+                                            <MultiBinding StringFormat="{}{0:HH:mm} - {1}">
+                                                <Binding Path="Start" />
+                                                <Binding Path ="Name" />
+                                            </MultiBinding>
+                                        </Label>
+                                        <Label Text="{Binding Genre, Converter={StaticResource EnumToDisplayName}}" />
+                                        <Label Text="{Binding Duration, StringFormat='{0} minutes'}" />
+                                        <Label Text="{Binding ReleaseDate, StringFormat='{0:yyyy}'}" />
+                                    </VerticalStackLayout>
+                                    <VerticalStackLayout HorizontalOptions="End">
+                                        <Button
+                                            Text="Edit"
+                                            BackgroundColor="CornflowerBlue"
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type vms:CinemaHallDetailsViewModel}}, Path=EditPerformanceCommand}"
+                                            CommandParameter="{Binding .}" />
+                                        <Button Text="Delete"
+                                                BackgroundColor="CornflowerBlue"
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type vms:CinemaHallDetailsViewModel}},Path=DeletePerformanceCommand}"
+                                                CommandParameter="{Binding .}" />
+                                    </VerticalStackLayout>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </RefreshView>
+        </Border>
+        <Button Grid.Row="3"
+            Text="Add a Performance"
+            Margin="0,10,0,0"
+            BackgroundColor="CornflowerBlue"
+            Command="{Binding AddPerformanceCommand}" />
+        <BoxView
+            IsVisible="{Binding IsBusy}"
+            BackgroundColor="Gray"
+            Opacity="0.2"
+            InputTransparent="False" />
+        <ActivityIndicator
+            Color="CornflowerBlue"
+            IsRunning="{Binding IsBusy}"
+            IsVisible="{Binding IsBusy}"
+            VerticalOptions="Center"
+            HorizontalOptions="Center" />
     </Grid>
 </ContentPage>

@@ -2,16 +2,15 @@ using CinemaPerformances.ViewModels;
 
 namespace CinemaPerformances.Pages;
 
-public partial class CinemaHallDetailsPage : ContentPage
+public partial class PerformanceEditPage : ContentPage
 {
-    private readonly CinemaHallDetailsViewModel _viewModel;
-
-    public CinemaHallDetailsPage(CinemaHallDetailsViewModel viewModel)
+    private readonly PerformanceEditViewModel _viewModel;
+	public PerformanceEditPage(PerformanceEditViewModel viewModel)
 	{
-        InitializeComponent();
+		InitializeComponent();
         _viewModel = viewModel;
         BindingContext = viewModel;
-    }
+	}
 
     protected override async void OnAppearing()
     {

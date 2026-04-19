@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:pages="clr-namespace:CinemaPerformances.Pages"
+             xmlns:vms="clr-namespace:CinemaPerformances.ViewModels"
+             x:Class="CinemaPerformances.Pages.PerformanceEditPage"
+             x:DataType="vms:PerformanceEditViewModel"
+             Title="Create a Performance" IsEnabled="{Binding IsNotBusy}">
+    <Grid>
+        <ScrollView>
+            <VerticalStackLayout
+                Padding="10,20"
+                Spacing="10">
+                <Label Text="Name" />
+                <Entry Placeholder="Name" Text="{Binding Name}" />
+                <Label Text="{Binding Errors[Name]}" TextColor="Red" IsVisible="{Binding Errors[Name], Converter={StaticResource StringToBool}}" />
+                <Label Text="Genre" />
+                <Picker
+                    Title="Select Performance genre"
+                    ItemDisplayBinding="{Binding DisplayName}"
+                    ItemsSource="{Binding Genres}"
+                    SelectedItem="{Binding Genre}" />
+                <Label Text="{Binding Errors[Genre]}" TextColor="Red" IsVisible="{Binding Errors[Genre], Converter={StaticResource StringToBool}}" />
+                <Label Text="Release date" />
+                <DatePicker Date="{Binding ReleaseDate}" />
+                <Label Text="{Binding Errors[ReleaseDate]}" TextColor="Red" IsVisible="{Binding Errors[ReleaseDate], Converter={StaticResource StringToBool}}" />
+                <Label Text="Start" />
+                <TimePicker Time="{Binding Start}" />
+                <Label Text="{Binding Errors[Start]}" TextColor="Red" IsVisible="{Binding Errors[Start], Converter={StaticResource StringToBool}}" />
+                <Label Text="Duration" />
+                <Entry Placeholder="60" Text="{Binding Duration}" />
+                <Label Text="{Binding Errors[Duration]}" TextColor="Red" IsVisible="{Binding Errors[Duration], Converter={StaticResource StringToBool}}" />
+                <Grid
+                    ColumnDefinitions="*,*"
+                    ColumnSpacing="10"
+                    Padding="10">
+                    <Button
+                        Grid.Column="0"
+                        Text="Update"
+                        BackgroundColor="CornflowerBlue"
+                        Command="{Binding UpdatePerformanceCommand}"></Button>
+                    <Button
+                        Grid.Column="1"
+                        Text="Back"
+                        BackgroundColor="CornflowerBlue"
+                        Command="{Binding BackCommand}"></Button>
+                </Grid>
+            </VerticalStackLayout>
+        </ScrollView>
+        <BoxView
+            IsVisible="{Binding IsBusy}"
+            BackgroundColor="Gray"
+            Opacity="0.2"
+            InputTransparent="False"/>
+        <ActivityIndicator
+            Color="CornflowerBlue"
+            IsRunning="{Binding IsBusy}"
+            IsVisible="{Binding IsBusy}"
+            VerticalOptions="Center"
+            HorizontalOptions="Center"/>
+    </Grid>
+</ContentPage>
